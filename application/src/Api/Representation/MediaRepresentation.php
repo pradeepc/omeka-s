@@ -28,6 +28,7 @@ class MediaRepresentation extends AbstractResourceEntityRepresentation
             'o:ingester' => $this->ingester(),
             'o:renderer' => $this->renderer(),
             'o:item' => $this->item()->getReference(),
+            'o:property' => $this->property()->getReference(),
             'o:source' => $this->source(),
             'o:media_type' => $this->mediaType(),
             'o:sha256' => $this->sha256(),
@@ -233,6 +234,12 @@ class MediaRepresentation extends AbstractResourceEntityRepresentation
     {
         return $this->getAdapter('items')
             ->getRepresentation($this->resource->getItem());
+    }
+
+    public function property()
+    {
+        return $this->getAdapter('properties')
+            ->getRepresentation($this->resource->getProperty());
     }
 
     /**

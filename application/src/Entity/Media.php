@@ -82,6 +82,12 @@ class Media extends Resource
     protected $item;
 
     /**
+     * @ManyToOne(targetEntity="Property", inversedBy="media")
+     * @JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    protected $property;
+
+    /**
      * @Column(nullable=true, length=190)
      */
     protected $lang;
@@ -223,6 +229,16 @@ class Media extends Resource
     public function getItem()
     {
         return $this->item;
+    }
+
+    public function setProperty(Property $property = null)
+    {
+        $this->property = $property;
+    }
+
+    public function getProperty()
+    {
+        return $this->property;
     }
 
     public function setLang($lang)

@@ -64,10 +64,10 @@ class Property extends \Omeka\Entity\Property implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'owner', 'vocabulary', 'localName', 'label', 'comment', 'values'];
+            return ['__isInitialized__', 'id', 'owner', 'vocabulary', 'localName', 'label', 'comment', 'values', 'media'];
         }
 
-        return ['__isInitialized__', 'id', 'owner', 'vocabulary', 'localName', 'label', 'comment', 'values'];
+        return ['__isInitialized__', 'id', 'owner', 'vocabulary', 'localName', 'label', 'comment', 'values', 'media'];
     }
 
     /**

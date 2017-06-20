@@ -64,10 +64,10 @@ class Media extends \Omeka\Entity\Media implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'ingester', 'renderer', 'data', 'source', 'mediaType', 'storageId', 'extension', 'sha256', 'hasOriginal', 'hasThumbnails', 'position', 'item', 'lang', 'owner', 'resourceClass', 'resourceTemplate', 'isPublic', 'created', 'modified', 'values'];
+            return ['__isInitialized__', 'id', 'ingester', 'renderer', 'data', 'source', 'mediaType', 'storageId', 'extension', 'sha256', 'hasOriginal', 'hasThumbnails', 'position', 'item', 'property', 'lang', 'owner', 'resourceClass', 'resourceTemplate', 'isPublic', 'created', 'modified', 'values'];
         }
 
-        return ['__isInitialized__', 'id', 'ingester', 'renderer', 'data', 'source', 'mediaType', 'storageId', 'extension', 'sha256', 'hasOriginal', 'hasThumbnails', 'position', 'item', 'lang', 'owner', 'resourceClass', 'resourceTemplate', 'isPublic', 'created', 'modified', 'values'];
+        return ['__isInitialized__', 'id', 'ingester', 'renderer', 'data', 'source', 'mediaType', 'storageId', 'extension', 'sha256', 'hasOriginal', 'hasThumbnails', 'position', 'item', 'property', 'lang', 'owner', 'resourceClass', 'resourceTemplate', 'isPublic', 'created', 'modified', 'values'];
     }
 
     /**

@@ -57,6 +57,7 @@ CREATE TABLE `job` (
 CREATE TABLE `media` (
   `id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
+  `property_id` int(11) DEFAULT NULL,
   `ingester` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `renderer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data` longtext COLLATE utf8mb4_unicode_ci COMMENT '(DC2Type:json_array)',
@@ -72,8 +73,10 @@ CREATE TABLE `media` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_6A2CA10C5CC5DB90` (`storage_id`),
   KEY `IDX_6A2CA10C126F525E` (`item_id`),
+  KEY `IDX_6A2CA10C549213EC` (`property_id`),
   KEY `item_position` (`item_id`,`position`),
   CONSTRAINT `FK_6A2CA10C126F525E` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_6A2CA10C549213EC` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_6A2CA10CBF396750` FOREIGN KEY (`id`) REFERENCES `resource` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `migration` (

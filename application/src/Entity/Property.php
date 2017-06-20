@@ -62,6 +62,15 @@ class Property extends AbstractEntity
      */
     protected $values;
 
+    /**
+     * @OneToMany(
+     *     targetEntity="Media",
+     *     mappedBy="property",
+     *     fetch="EXTRA_LAZY"
+     * )
+     */
+    protected $media;
+
     public function __construct()
     {
         $this->values = new ArrayCollection;

@@ -190,6 +190,7 @@ class ItemAdapter extends AbstractResourceEntityAdapter
         if ($this->shouldHydrate($request, 'o:media')) {
             $mediasData = $request->getValue('o:media', []);
             $adapter = $this->getAdapter('media');
+            $propertyAdapter = $this->getAdapter('properties');
             $class = $adapter->getEntityClass();
             $retainMedia = [];
             $position = 1;
@@ -218,6 +219,11 @@ class ItemAdapter extends AbstractResourceEntityAdapter
                     $entity->getMedia()->add($media);
                     $retainMedia[] = $media;
                 }
+                $property = null;
+                if (isset($mediaData['o:property']['o:id']) && is_numeric($mediaData['o:property']['o:id'])) {
+                    $property = $propertyAdapter->findEntity($mediaData['o:property']['o:id']);
+                }
+                $media->setProperty($property);
                 $position++;
             }
             // Remove media not included in request.

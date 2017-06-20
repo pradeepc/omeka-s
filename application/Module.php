@@ -20,7 +20,7 @@ class Module extends AbstractModule
     /**
      * This Omeka version.
      */
-    const VERSION = '1.0.0-beta5';
+    const VERSION = '1.0.0-beta6';
 
     /**
      * The vocabulary IRI used to define Omeka application data.
@@ -121,6 +121,30 @@ class Module extends AbstractModule
             '*',
             'api.context',
             [$this, 'addTermDefinitionsToContext']
+        );
+
+        // Add media node objects to an item's JSON-LD serialization.
+        $sharedEventManager->attach(
+            'Omeka\Api\Representation\ItemRepresentation',
+            'rep.resource.json',
+            function (ZendEvent $event) {
+                $json = $event->getParam('jsonLd');
+                $itemMedia = $event->getTarget()->media();
+                if (!$itemMedia) {
+                    return;
+                }
+                foreach ($itemMedia as $media) {
+                    $property = $media->property();
+                    if ($property) {
+                        // Note that with the absense of property_id the value
+                        // hydrator will ignore this node.
+                        $json[$property->term()][] = [
+                            '@id' => $media->apiUrl(),
+                        ];
+                    }
+                }
+                $event->setParam('jsonLd', $json);
+            }
         );
 
         $sharedEventManager->attach(

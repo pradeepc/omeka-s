@@ -15,6 +15,10 @@ $this->headScript()->appendFile($this->assetUrl('js/item-manage-media.js', 'Omek
     <?php
     $i = 0;
     foreach ($resource->media() as $media):
+    $propertyId = null;
+    if ($media->property()) {
+        $propertyId = $media->property()->id();
+    }
     ?>
     <div class="media value row">
         <ul class='actions'>
@@ -59,6 +63,10 @@ $this->headScript()->appendFile($this->assetUrl('js/item-manage-media.js', 'Omek
         <span class='restore-value'><?php echo $this->translate('Media to be removed'); ?></span>
         <img src="<?php echo $escape($media->thumbnailUrl('square')); ?>">
         <span class="resource-name"><?php echo $escape($media->displayTitle()); ?></span>
+        <span><?php echo $this->propertySelect([
+            'name' => sprintf('o:media[%s][o:property][o:id]', $i),
+            'attributes' => ['value' => $propertyId],
+        ]); ?></span>
         <input type="hidden" name="o:media[<?php echo $i; ?>][o:id]" value="<?php echo $escape($media->id()); ?>">
         <span class="sortable-handle"></span>
     </div>
